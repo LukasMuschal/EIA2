@@ -1,3 +1,3 @@
-let v=1;
-v= v+1;
+let v=true;
+v= true;
 console.log(v);
