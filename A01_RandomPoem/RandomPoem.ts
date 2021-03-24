@@ -1,3 +1,3 @@
-let Test: string = "Test";
-Test="Test";
-console.log(Test);
+let test: string = "Test";
+test = "Test";
+console.log(test);
