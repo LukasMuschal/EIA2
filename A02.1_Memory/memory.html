@@ -10,9 +10,36 @@
 </head>
 <body>
     <h1>Memory-Game</h1>
-    <div id="gameContainer">
-      </div>
-    </div>
+    <fieldset id = "form">
+      <form>
+          <label for = "stepper">Choose number of pairs you want to play! (5-25)</label>
+          <input type = "number" class = "steppers" name = "stepper" step = "1" min = "5" max ="25" value = "5">
+          <br>
+          <label for = "slider">Choose size of cards!</label>
+          <input type = "range" class = "sliders" name = "slider" min = "50" max = "200" step = "10" value = "100">
+          <br>
+          <label for ="backgroundcolor">Choose color of the background!</label>
+          <input type = "color" class = "backgroundcolors" name = "backgroundcolor" value = "#ffffff" id = "background">
+          <br>
+          <label for ="cardColor">Choose color of the cards!</label>
+          <input type = "color" class = "cardColors" name = "cardColor" value = "#ffffff" id = "colorCard">
+          <br>
+          <label for="fontColor">Choose color of the font</label>
+          <input type = "color" class = "fontColors" name = "fontColor" value = "#000000" id = "colorFont">
+          <br>
+          <label for="fonts">Choose a font-family!</label>
+          <select name = "fonts" id = "font">
+            <option value ="fantasy">Fantasy</option>
+            <option value ="Georgia">Georgia</option>
+            <option value="sans-serif">sans-serif</option>
+          </select>
+          <br>
+          <label for="buttonName"></label>
+          <button name ="buttonName" type="button" class="button">Start Game!</button>
+      </form>
+    </fieldset>
+    <div id="gameContainer"></div>
+    
     
 </body>
 </html>
