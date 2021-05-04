@@ -90,7 +90,7 @@ var MemoryGame;
     }
     function checkWin() {
         if (cardFront == memoryCards) {
-            window.alert("Perfect!" + "Time you needed: " + count + "sec");
+            window.alert("Perfect! " + "Time you needed: " + count + " sec");
         }
     }
 })(MemoryGame || (MemoryGame = {}));
