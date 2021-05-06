@@ -1,0 +1,32 @@
+button {
+    position: absolute;
+    background-color: black;
+    border-color: blueviolet;
+    color: white;
+    font-family: fantasy;
+    width: 200px;
+    height: 80px;
+    margin: 10px;
+    border-radius: 10px;
+    font-size: 1em;
+}
+button:hover{
+    color:blueviolet;
+}
+canvas {
+    border-radius: 20px;
+    border-color: blueviolet;
+    border-width: 10px;
+    border-style: groove;
+
+}
+h1 {
+    font-family: fantasy;
+    color:blueviolet;
+    text-shadow: 2px 2px black;
+
+    
+}
+body{
+    background-color: rgb(100, 96, 96);
+}
