@@ -1,7 +1,6 @@
 "use strict";
 var MemoryGame;
 (function (MemoryGame) {
-    window.addEventListener("load", handleLoad);
     let cardContent = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y"];
     let memoryCards;
     let cardArray = [];
@@ -13,6 +12,7 @@ var MemoryGame;
     let gameBoard;
     let cardType = [];
     let count = 0;
+    window.addEventListener("load", handleLoad);
     function handleLoad() {
         form = document.querySelector("#form");
         form.addEventListener("change", handleChange);

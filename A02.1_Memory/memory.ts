@@ -1,5 +1,5 @@
 namespace MemoryGame {
-    window.addEventListener("load", handleLoad);
+   
 
     let cardContent: string[] = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y"];
     let memoryCards: number;
@@ -12,7 +12,7 @@ namespace MemoryGame {
     let gameBoard: HTMLDivElement;
     let cardType: string[] = [];
     let count: number =  0;
-
+    window.addEventListener("load", handleLoad);
    
 
     function handleLoad(): void {
