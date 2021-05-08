@@ -27,10 +27,13 @@ namespace generativeKunst {
         return color;
     }
     //canvas schwarz
+    crc2.save();
     crc2.fillStyle = "#000000";
     crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
+    crc2.restore();
 
     // Random Sterne
+    crc2.save();
     for (let i: number = 0; i <= 300; i++) {
             crc2.beginPath();
             x = (Math.random() * (max - min)) + min;   // x-Koordinate
@@ -53,7 +56,9 @@ namespace generativeKunst {
             crc2.strokeStyle = getRandomColor();
             crc2.closePath();
             }
+    crc2.restore();
         //Planet 1
+    crc2.save();
     crc2.beginPath();
     let gradient2: CanvasGradient = crc2.createRadialGradient(110, 90, 5, 100, 100, 80);
     gradient2.addColorStop(0, getRandomColor());
@@ -68,8 +73,10 @@ namespace generativeKunst {
     crc2.fillStyle = gradient2;
     crc2.fillRect(20, 20, 160, 160);
     crc2.closePath();
+    crc2.restore();
 
-     // Spirale 1  
+     // Spirale 1 
+    crc2.save(); 
     for (let i: number = 0; i <= 300; i++) {
         crc2.beginPath();
         x = (Math.random() * (max1 - min1)) + min1;   
@@ -95,8 +102,10 @@ namespace generativeKunst {
     crc2.fill();
     crc2.stroke();
     crc2.closePath();
+    crc2.restore();
 
     // SPirale 2
+    crc2.save();
     for (let i: number = 0; i <= 300; i++) {
         crc2.beginPath();
         x = (Math.random() * (max1 - min1)) + min1;   // x-Koordinate
@@ -122,8 +131,10 @@ namespace generativeKunst {
     crc2.fill();
     crc2.stroke();
     crc2.closePath();
+    crc2.restore();
     
             // ANtrieb
+    crc2.save();
     let lineCap: string = "miter";
     for (let i: number = 0; i < lineCap.length; i++) {
                     lineCap = "miter";
@@ -142,15 +153,21 @@ namespace generativeKunst {
                     crc2.fill(); 
                     crc2.closePath();  
                 }
+    crc2.restore();
      //Dreieck flügel 
+    crc2.save();
     crc2.beginPath();
+    crc2.shadowColor = getRandomColor();
+    crc2.shadowBlur = 30;
     crc2.fillStyle = getRandomColor();
     crc2.moveTo(450, 300);
     crc2.lineTo(320, 390);
     crc2.lineTo(580, 390);
     crc2.fill();
     crc2.closePath();
+    
        //Körper
+       
     crc2.beginPath();
     crc2.fillRect(390, 200, 120, 190);
     crc2.strokeStyle = getRandomColor();
@@ -159,8 +176,11 @@ namespace generativeKunst {
     crc2.lineWidth = 20;
     crc2.fill();
     crc2.closePath();
+    crc2.restore();
+    
 
       // Dreieck
+    crc2.save();
     crc2.beginPath();
     crc2.fillStyle = getRandomColor();
     crc2.moveTo(450, 100);
@@ -168,7 +188,9 @@ namespace generativeKunst {
     crc2.lineTo(510, 200);
     crc2.fill();
     crc2.closePath();
+    crc2.restore();
     //Fenster
+    crc2.save();
     crc2.beginPath();
     crc2.strokeStyle = getRandomColor();
     crc2.fillStyle = getRandomColor();
@@ -176,12 +198,17 @@ namespace generativeKunst {
     crc2.stroke();
     crc2.fill();
     crc2.closePath();
+    crc2.restore();
     
     //Text
+    
     crc2.font = " 40px fantasy";
     crc2.fillText("Spaceship", 400, 315, 100);
+    crc2.fillStyle = getRandomColor();
+    
 
 // PLanet 2
+    crc2.save();
     function getColor(): string {
     let colors: string[] = ["blue", "gray"];
     let light: string = "light";
@@ -210,6 +237,7 @@ namespace generativeKunst {
         crc2.stroke();
     }
     crc2.closePath();
+    crc2.restore();
 
     let newCanvas: HTMLElement = <HTMLElement>document.querySelector("button");
     newCanvas.addEventListener("click", function(): void {
