@@ -1,26 +1,21 @@
 "use strict";
-var Blumenwiese;
-(function (Blumenwiese) {
+var BlumenwieseClasses;
+(function (BlumenwieseClasses) {
     window.addEventListener("load", handleLoad);
+    let canvas;
+    let letters = "";
+    let color = "";
+    let beeArray = [];
+    let cloudArray = [];
+    let xCloudArray = [];
+    let yCloudArray = [];
+    let cloudSize = new BlumenwieseClasses.Vector(10, 5);
     function handleLoad(_event) {
         let canvas = document.querySelector("#board");
         let crc2 = canvas.getContext("2d");
-        let letters = "";
-        let color = "";
-        let radius = 0;
-        let angle = 0;
-        drawSky(0, 0, "#88d1CF");
-        getRandomColor();
-        randomStars(0, 0, 0);
-        drawField(0, 0);
-        drawMoon(180, 100, "#f7fae1");
-        drawCloud();
-        drawMountain(0, 350, "#575554", "#000000");
-        drawTrees(0, 350, "#7a2900", "#7a2900");
-        drawFlowers1(450, 1000);
-        drawFlowers2(450, 1000);
-        drawFlowers3(450, 1000);
-        drawBees(0, 350);
+        createCloud();
+        createCloudxy(20, cloudSize);
+        createBees(10);
         function getRandomColor() {
             letters = "0123456789ABCDEF";
             color = "#";
@@ -61,33 +56,6 @@ var Blumenwiese;
             crc2.fill();
             crc2.closePath();
         }
-        function randomStars(_x, _y, _radius) {
-            let max = 1200;
-            let min = 0;
-            for (let i = 0; i <= 300; i++) {
-                crc2.beginPath();
-                _x = (Math.random() * (max - min)) + min; // x-Koordinate
-                _y = (Math.random() * (max - min)) + min;
-                if (i <= 30) {
-                    _radius = 4;
-                }
-                else if (i >= 250) {
-                    _radius = 3;
-                }
-                else {
-                    _radius = 2;
-                }
-                crc2.arc(_x, _y, _radius, 0, 2 * Math.PI);
-                crc2.fill();
-                crc2.fillStyle = "#FFFACD";
-                crc2.lineWidth = 1;
-                crc2.stroke();
-                crc2.strokeStyle = getRandomColor();
-                crc2.closePath();
-            }
-        }
-        crc2.restore();
-        crc2.save();
         function drawMoon(_x, _y, _fillColor) {
             crc2.beginPath();
             crc2.arc(_x, _y, 65, 0, 2 * Math.PI);
@@ -140,7 +108,6 @@ var Blumenwiese;
             //Kleiner Baum
             crc2.fillRect(_x + 400, _y + 50, 10, 60);
             //Baum rechts
-            crc2.fillRect(_x + 900, _y + 70, 14, 80);
             //Großer Baum
             crc2.fillRect(_x + 235, _y + 100, 30, 200);
             crc2.fill();
@@ -166,16 +133,6 @@ var Blumenwiese;
             crc2.moveTo(_x + 380, _y);
             crc2.lineTo(_x + 405, _y - 50);
             crc2.lineTo(_x + 430, _y);
-            //baum rechts
-            crc2.moveTo(_x + 850, _y + 70);
-            crc2.lineTo(_x + 907, _y + 10);
-            crc2.lineTo(_x + 957, _y + 70);
-            crc2.moveTo(_x + 860, _y + 40);
-            crc2.lineTo(_x + 907, _y - 20);
-            crc2.lineTo(_x + 947, _y + 40);
-            crc2.moveTo(_x + 870, _y + 10);
-            crc2.lineTo(_x + 907, _y - 50);
-            crc2.lineTo(_x + 937, _y + 10);
             //Großer Baum
             crc2.moveTo(_x + 400, _y + 120);
             crc2.lineTo(_x + 100, _y + 120);
@@ -189,12 +146,12 @@ var Blumenwiese;
             crc2.fill();
             crc2.closePath();
         }
-        function drawFlowers1(_x, _y) {
-            let max1 = _x;
-            let min1 = _y;
-            for (let i = 0; i < 5; i++) {
-                _x = (Math.random() * (max1 - min1)) + min1;
-                _y = (Math.random() * (max1 - min1)) + min1;
+        function drawFlower1(_x, _y) {
+            for (let i = 0; i < 8; i++) {
+                if (i <= 4)
+                    _y += 50;
+                if (i >= 4)
+                    _x += 50;
                 crc2.beginPath();
                 crc2.fillStyle = "#447a3e";
                 crc2.fillRect(_x, _y, 4, 70);
@@ -210,14 +167,15 @@ var Blumenwiese;
                 crc2.arc(_x + 2, _y, 5, 0, 2 * Math.PI);
                 crc2.fill();
                 crc2.closePath();
+                //Flower 1.2
             }
         }
-        function drawFlowers2(_x, _y) {
-            let max1 = _x;
-            let min1 = _y;
-            for (let i = 0; i < 4; i++) {
-                _x = (Math.random() * (max1 - min1)) + min1;
-                _y = (Math.random() * (max1 - min1)) + min1;
+        function drawFlower2(_x, _y) {
+            for (let i = 0; i < 8; i++) {
+                if (i <= 4)
+                    _y += 50;
+                if (i >= 4)
+                    _x += 50;
                 crc2.beginPath();
                 crc2.fillStyle = "#447a3e";
                 crc2.fillRect(_x, _y, 4, 70);
@@ -225,36 +183,24 @@ var Blumenwiese;
                 crc2.arc(_x + 2, _y, 20, 0, 2 * Math.PI);
                 crc2.fill();
                 crc2.beginPath();
-                crc2.lineWidth = 3;
-                crc2.lineCap = "round";
-                crc2.lineJoin = "round";
-                crc2.shadowColor = getRandomColor();
-                crc2.shadowBlur = 30;
                 crc2.strokeStyle = getRandomColor();
                 crc2.fillStyle = getRandomColor();
                 crc2.moveTo(_x, _y);
-                for (let i = 0; i < 150; i++) {
-                    radius += 0.008;
-                    angle += (Math.PI * 2) / 50;
-                    let x1 = _x + 2 + radius * Math.cos(angle);
-                    let y1 = _y + radius * Math.sin(angle);
-                    crc2.lineTo(x1, y1);
-                }
                 crc2.fill();
                 crc2.stroke();
                 crc2.closePath();
             }
         }
-        function drawFlowers3(_x, _y) {
-            let max1 = _x;
-            let min1 = _y;
-            for (let i = 0; i < 4; i++) {
-                _x = (Math.random() * (max1 - min1)) + min1;
-                _y = (Math.random() * (max1 - min1)) + min1;
+        function drawFlower3(_x, _y) {
+            for (let i = 0; i < 8; i++) {
+                if (i <= 4)
+                    _y += 50;
+                if (i >= 4)
+                    _x += 50;
                 crc2.beginPath();
                 crc2.fillStyle = "#447a3e";
                 crc2.fillRect(_x, _y, 4, 70);
-                crc2.fillStyle = getRandomColor();
+                crc2.fillStyle = "pink";
                 crc2.moveTo(_x + 2, _y);
                 crc2.lineTo(_x - 25, _y - 25);
                 crc2.lineTo(_x + 25, _y - 25);
@@ -265,50 +211,91 @@ var Blumenwiese;
                 crc2.closePath();
             }
         }
-        function drawBees(_x, _y) {
-            crc2.shadowColor = "";
-            crc2.shadowBlur = 0;
-            //Körper Biene
-            crc2.beginPath();
-            crc2.fillStyle = "yellow";
-            crc2.ellipse(_x + 200, _y + 200, 15, 20, Math.PI / 2, 0, 2 * Math.PI);
-            crc2.arc(_x + 220, _y + 195, 10, 0, 2 * Math.PI);
-            crc2.fill();
-            crc2.closePath();
-            //Auge Biene
-            crc2.beginPath();
-            crc2.fillStyle = "black";
-            crc2.arc(_x + 224, _y + 195, 3, 0, 2 * Math.PI);
-            crc2.fill();
-            crc2.closePath();
-            //Flügel Biene
-            crc2.beginPath();
-            crc2.fillStyle = "lightBlue";
-            crc2.ellipse(_x + 195, _y + 205, 5, 20, Math.PI / 4, 0, 2 * Math.PI);
-            crc2.fill();
-            crc2.closePath();
-            // Stachel Biene
-            crc2.beginPath();
-            crc2.fillStyle = "black";
-            crc2.moveTo(_x + 180, _y + 200);
-            crc2.lineTo(_x + 180, _y + 206);
-            crc2.lineTo(_x + 170, _y + 203);
-            crc2.fill();
-            crc2.closePath();
+        // function createFlower(): void {
+        // let flowerXY: Vector = new Vector(0, 0);
+        //  let flower1: Flower = new Flower (flowerXY, "#447a3e", "#a000d1");
+        //  flower1.drawFlower(450, 1000);
+        // flowerArray.push(flower1);
+        //   }
+        function createCloudxy(_particleNumber, _size) {
+            for (let i = 0; i < _particleNumber; i++) {
+                let x = (Math.random() - 0.5) * _size.x;
+                let y = -(Math.random() * _size.y);
+                xCloudArray.push(x);
+                yCloudArray.push(y);
+            }
         }
-        function drawCloud() {
-            crc2.beginPath();
-            crc2.fillStyle = "lightgray";
-            crc2.arc(50, 70, 30, 0, 2 * Math.PI);
-            crc2.arc(80, 90, 25, 0, 2 * Math.PI);
-            crc2.arc(80, 50, 25, 0, 2 * Math.PI);
-            crc2.fill();
-            crc2.closePath();
-            crc2.beginPath();
-            crc2.arc(110, 70, 30, 0, 2 * Math.PI);
-            crc2.fill();
-            crc2.closePath();
+        function createCloud() {
+            let randomXClouds1 = 0;
+            let randomYClouds1 = 150;
+            // let randomXClouds2: number = Math.random() * ((crc2.canvas.width * 0.4 - crc2.canvas.width * 0.3) + crc2.canvas.width * 0.3);
+            // let randomYClouds2: number = Math.random() * (crc2.canvas.height * 0.6 - crc2.canvas.height * 0.4) + crc2.canvas.height * 0.4;
+            let cloud1Position = new BlumenwieseClasses.Vector(randomXClouds1, randomYClouds1);
+            // let cloud1Position2: Vector = new Vector (randomXClouds2, randomYClouds2);
+            let cloudSize = new BlumenwieseClasses.Vector(100, 50);
+            let velocityClouds1 = new BlumenwieseClasses.Vector(4, 0);
+            // let velocityClouds2: Vector = new Vector (-20, 0);
+            for (let i = 0; i < 20; i++) {
+                let cloud1 = new BlumenwieseClasses.Cloud(cloud1Position, cloudSize, velocityClouds1, xCloudArray[i], yCloudArray[i]);
+                // let cloud2: Cloud = new Cloud (cloud1Position2, cloudSize, velocityClouds2, xCloudArray[i], yCloudArray[i]);
+                cloud1.drawCloud();
+                // cloud2.drawCloud();
+                cloudArray.push(cloud1);
+                // cloudArray.push(cloud2);
+            }
         }
+        function createBees(_nBees) {
+            console.log("Create Bees");
+            for (let i = 0; i < _nBees; i++) {
+                let randomXBee = Math.random() * (crc2.canvas.width);
+                let randomYBee = Math.random() * (crc2.canvas.height);
+                let beePosition = new BlumenwieseClasses.Vector(randomXBee, randomYBee);
+                let beeVelocity = new BlumenwieseClasses.Vector(20, 0);
+                let bee = new BlumenwieseClasses.Bienen(beePosition, beeVelocity);
+                beeArray.push(bee);
+            }
+        }
+        function update() {
+            crc2.fillRect(0, 0, crc2.canvas.width, crc2.canvas.height);
+            crc2.save();
+            drawSky(0, 0, "#88d1CF");
+            crc2.restore();
+            crc2.save();
+            getRandomColor();
+            crc2.restore();
+            crc2.save();
+            // randomStars(0, 0, 0);
+            crc2.restore();
+            crc2.save();
+            drawField(0, 0);
+            crc2.restore();
+            crc2.save();
+            drawMoon(180, 100, "#f7fae1");
+            crc2.restore();
+            crc2.save();
+            drawMountain(0, 350, "#575554", "#000000");
+            crc2.restore();
+            crc2.save();
+            drawTrees(0, 350, "#7a2900", "#7a2900");
+            crc2.restore();
+            crc2.save();
+            drawFlower1(800, 450);
+            drawFlower2(700, 550);
+            drawFlower3(900, 350);
+            //for (let cloud of cloudArray) {
+            //  cloud.move(1 / 50);
+            //cloud.drawCloud(0, 0);
+            //}
+            for (let bee of beeArray) {
+                bee.move(1 / 30);
+                bee.drawBees(0, 0);
+            }
+            for (let i = 0; i < 20; i++) {
+                cloudArray[i].drawCloud();
+                cloudArray[i].move(1 / 50);
+            }
+        }
+        window.setInterval(update, 20);
     }
-})(Blumenwiese || (Blumenwiese = {}));
-//# sourceMappingURL=Blumenwiese.js.map
+})(BlumenwieseClasses || (BlumenwieseClasses = {}));
+//# sourceMappingURL=main.js.map

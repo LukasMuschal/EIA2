@@ -13,11 +13,13 @@ namespace Blumenwiese {
         randomStars(0, 0, 0);
         drawField(0, 0);
         drawMoon(180, 100, "#f7fae1");
+        drawCloud();
         drawMountain(0, 350, "#575554", "#000000");
         drawTrees(0, 350, "#7a2900", "#7a2900");
         drawFlowers1(450, 1000);
         drawFlowers2(450, 1000);
         drawFlowers3(450, 1000);
+        drawBees(0, 350);
         
         
 
@@ -292,6 +294,51 @@ namespace Blumenwiese {
                 crc2.fill();
                 crc2.closePath();
             }
+        }
+        function drawBees(_x: number, _y: number): void {
+            crc2.shadowColor = "";
+            crc2.shadowBlur = 0;
+            //Körper Biene
+            crc2.beginPath();
+            crc2.fillStyle = "yellow";
+            crc2.ellipse(_x + 200, _y + 200, 15, 20, Math.PI / 2, 0, 2 * Math.PI);
+            crc2.arc(_x + 220, _y + 195, 10, 0, 2 * Math.PI);
+            crc2.fill();
+            crc2.closePath();
+            //Auge Biene
+            crc2.beginPath();
+            crc2.fillStyle = "black";
+            crc2.arc(_x + 224, _y + 195, 3, 0, 2 * Math.PI);
+            crc2.fill();
+            crc2.closePath();
+            //Flügel Biene
+            crc2.beginPath();
+            crc2.fillStyle = "lightBlue";
+            crc2.ellipse(_x + 195, _y + 205, 5, 20, Math.PI / 4, 0, 2 * Math.PI);
+            crc2.fill();
+            crc2.closePath();
+            // Stachel Biene
+            crc2.beginPath();
+            crc2.fillStyle = "black";
+            crc2.moveTo(_x + 180, _y + 200);
+            crc2.lineTo(_x + 180, _y + 206);
+            crc2.lineTo(_x + 170, _y + 203);
+            crc2.fill();
+            crc2.closePath();
+        }
+        function drawCloud(): void {
+            crc2.beginPath();
+            crc2.fillStyle = "lightgray";
+            crc2.arc(50, 70, 30, 0,  2 * Math.PI);
+            crc2.arc(80, 90, 25, 0,  2 * Math.PI);
+            crc2.arc(80, 50, 25, 0,  2 * Math.PI);
+            crc2.fill();
+            crc2.closePath();
+            crc2.beginPath();
+            crc2.arc(110, 70, 30, 0,  2 * Math.PI);
+            crc2.fill();
+            crc2.closePath();
+
         }
 }
 
