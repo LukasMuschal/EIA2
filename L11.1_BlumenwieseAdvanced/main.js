@@ -1,6 +1,6 @@
 "use strict";
-var BlumenwieseInheritance;
-(function (BlumenwieseInheritance) {
+var BlumenwieseAdvanced;
+(function (BlumenwieseAdvanced) {
     window.addEventListener("load", handleLoad);
     let canvas;
     let letters = "";
@@ -9,7 +9,7 @@ var BlumenwieseInheritance;
     let cloudArray = [];
     let xCloudArray = [];
     let yCloudArray = [];
-    let cloudSize = new BlumenwieseInheritance.Vector(10, 5);
+    let cloudSize = new BlumenwieseAdvanced.Vector(10, 5);
     function handleLoad(_event) {
         let canvas = document.querySelector("#board");
         let crc2 = canvas.getContext("2d");
@@ -221,11 +221,11 @@ var BlumenwieseInheritance;
         function createCloud() {
             let xCloud = 0;
             let yCloud = 150;
-            let cloudPosition = new BlumenwieseInheritance.Vector(xCloud, yCloud);
-            let cloudSize = new BlumenwieseInheritance.Vector(100, 50);
-            let velocityCloud = new BlumenwieseInheritance.Vector(4, 0);
+            let cloudPosition = new BlumenwieseAdvanced.Vector(xCloud, yCloud);
+            let cloudSize = new BlumenwieseAdvanced.Vector(100, 50);
+            let velocityCloud = new BlumenwieseAdvanced.Vector(4, 0);
             for (let i = 0; i < 20; i++) {
-                let cloud = new BlumenwieseInheritance.Cloud(cloudPosition, cloudSize, velocityCloud, xCloudArray[i], yCloudArray[i]);
+                let cloud = new BlumenwieseAdvanced.Cloud(cloudPosition, cloudSize, velocityCloud, xCloudArray[i], yCloudArray[i]);
                 cloud.drawCloud();
                 cloudArray.push(cloud);
             }
@@ -234,9 +234,9 @@ var BlumenwieseInheritance;
             for (let i = 0; i < _nBees; i++) {
                 let randomXBee = Math.random() * (crc2.canvas.width);
                 let randomYBee = Math.random() * (crc2.canvas.height);
-                let beePosition = new BlumenwieseInheritance.Vector(randomXBee, randomYBee);
-                let beeVelocity = new BlumenwieseInheritance.Vector(20, 0);
-                let bee = new BlumenwieseInheritance.Bienen(beePosition, beeVelocity);
+                let beePosition = new BlumenwieseAdvanced.Vector(randomXBee, randomYBee);
+                let beeVelocity = new BlumenwieseAdvanced.Vector(20, 0);
+                let bee = new BlumenwieseAdvanced.Bienen(beePosition, beeVelocity);
                 beeArray.push(bee);
             }
         }
@@ -277,5 +277,5 @@ var BlumenwieseInheritance;
         }
         window.setInterval(update, 20);
     }
-})(BlumenwieseInheritance || (BlumenwieseInheritance = {}));
-//# sourceMappingURL=Main.js.map
+})(BlumenwieseAdvanced || (BlumenwieseAdvanced = {}));
+//# sourceMappingURL=main.js.map

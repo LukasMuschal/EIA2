@@ -1,4 +1,4 @@
-namespace BlumenwieseInheritance {
+namespace BlumenwieseAdvanced {
     export class Bienen extends Moveable {
        
 

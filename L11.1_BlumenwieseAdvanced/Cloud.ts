@@ -1,4 +1,4 @@
-namespace BlumenwieseInheritance {
+namespace BlumenwieseAdvanced {
     export class Cloud extends Moveable {
         
         size: Vector;

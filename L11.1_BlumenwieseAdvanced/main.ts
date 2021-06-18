@@ -1,4 +1,4 @@
-namespace BlumenwieseInheritance {
+namespace BlumenwieseAdvanced {
     window.addEventListener("load", handleLoad);
     let canvas: HTMLCanvasElement;
     export let crc2: CanvasRenderingContext2D;

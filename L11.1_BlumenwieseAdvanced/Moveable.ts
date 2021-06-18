@@ -1,4 +1,4 @@
-namespace BlumenwieseInheritance {
+namespace BlumenwieseAdvanced {
     export abstract class Moveable {
         public position: Vector;
         public velocity: Vector;
@@ -32,4 +32,3 @@ namespace BlumenwieseInheritance {
         }
      }
     
-
