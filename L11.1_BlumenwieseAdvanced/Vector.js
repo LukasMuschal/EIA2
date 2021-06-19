@@ -23,6 +23,9 @@ var BlumenwieseAdvanced;
             this.set(Math.cos(direction), Math.sin(direction));
             this.scale(length);
         }
+        copy() {
+            return new Vector(this.x, this.y);
+        }
     }
     BlumenwieseAdvanced.Vector = Vector;
 })(BlumenwieseAdvanced || (BlumenwieseAdvanced = {}));

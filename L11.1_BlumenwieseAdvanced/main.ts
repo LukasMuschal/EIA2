@@ -4,18 +4,32 @@ namespace BlumenwieseAdvanced {
     export let crc2: CanvasRenderingContext2D;
     let letters: string = "";
     let color: string = "";
+    
+    let flowerArray: Flower1 [] = [];
+    let flower2Array: Flower2 [] = [];
+    let flower3Array: Flower3 [] = [];
+
     let beeArray: Bienen [] = [];
     
     let cloudArray: Cloud [] = [];
     let xCloudArray: number [] = [];
     let yCloudArray: number [] = [];
     let cloudSize: Vector = new Vector (10, 5);
-
+    
+    window.setTimeout(function() {
+        alert("Nectar Full");
+    } , 30000);
+    
+ 
 
     function handleLoad(_event: Event): void {
         let canvas: HTMLCanvasElement = <HTMLCanvasElement> document.querySelector("#board");
         let crc2: CanvasRenderingContext2D = <CanvasRenderingContext2D> canvas.getContext("2d");
         
+
+        createFlower3(8);
+        createFlower1(8);
+        createFlower2(8);
         
         createCloud();
         createCloudxy(20, cloudSize);
@@ -170,83 +184,14 @@ namespace BlumenwieseAdvanced {
                 crc2.fill();
                 crc2.closePath();
             }
-
-        function drawFlower1(_x: number, _y: number): void {
-                for (let i: number = 0; i < 8; i++) {
-                    if (i <= 4) 
-                    _y += 50;
-                    if (i >= 4)
-                    _x += 50;
-                   
-                    crc2.beginPath();
-                    crc2.fillStyle = "#447a3e";
-                    crc2.fillRect(_x, _y , 4, 70);
-                    crc2.fillStyle = "#a000d1";
-                    crc2.arc(_x + 2, _y , 10, 0, 2 * Math.PI);
-                    crc2.arc(_x + 2, _y + 10, 10, 0, 2 * Math.PI );
-                    crc2.arc(_x - 8, _y, 10, 0, 2 * Math.PI );
-                    crc2.arc(_x + 2, _y - 10, 10, 0, 2 * Math.PI );
-                    crc2.arc(_x + 12, _y , 10, 0, 2 * Math.PI );
-                    crc2.fill();
-                    crc2.beginPath();
-                    crc2.fillStyle = "yellow";
-                    crc2.arc(_x + 2, _y , 5, 0, 2 * Math.PI);
+       
+      
+           
         
-                    crc2.fill();
-                    crc2.closePath();
         
-                
-                }
-            }
+    
         
-
-        function drawFlower2(_x: number, _y: number): void {
-            for (let i: number = 0; i < 8; i++) {
-                if (i <= 4) 
-                _y += 50;
-                if (i >= 4)
-                _x += 50;
-                crc2.beginPath();
-                crc2.fillStyle = "#447a3e";
-                crc2.fillRect(_x, _y , 4, 70);
-
-                crc2.fillStyle = "#f00000";
-                crc2.arc(_x + 2, _y , 20, 0, 2 * Math.PI);
-                crc2.fill();
-
-                crc2.beginPath();
-                
-                crc2.strokeStyle = getRandomColor();
-                crc2.fillStyle = getRandomColor();
-                crc2.moveTo(_x, _y);
-                crc2.fill();
-                crc2.stroke();
-                crc2.closePath();
-        }
-    }
-        function drawFlower3(_x: number, _y: number): void {
-            for (let i: number = 0; i < 8; i++) {
-                if (i <= 4) 
-                _y += 50;
-                if (i >= 4)
-                _x += 50;
-                crc2.beginPath();
-                crc2.fillStyle = "#447a3e";
-                crc2.fillRect(_x, _y , 4, 70);
-                crc2.fillStyle = "pink";
-               
-                crc2.moveTo(_x + 2, _y);
-                crc2.lineTo(_x - 25, _y - 25);
-                crc2.lineTo(_x + 25, _y - 25);
-
-                crc2.moveTo(_x + 2, _y + 25);
-                crc2.lineTo(_x - 15, _y + 15);
-                crc2.lineTo(_x + 15, _y + 15);
-
-                crc2.fill();
-                crc2.closePath();
-        }
-    }
+        
 
         function createCloudxy (_particleNumber: number, _size: Vector): void {
         for (let i: number = 0; i < _particleNumber; i++) {
@@ -272,11 +217,40 @@ namespace BlumenwieseAdvanced {
             }
     
         }
+        function createFlower1(_nFlowers: number): void {
+            for (let i: number = 0; i < _nFlowers; i++) {
+                let randomXFlower: number = Math.random() * (crc2.canvas.width);
+                let randomYFlower: number = Math.random() * (crc2.canvas.height);
+                let flowerPosition: Vector = new Vector (randomXFlower, randomYFlower);
+                let flower: Flower1 = new Flower1(flowerPosition);
+                flowerArray.push(flower);
+            }
 
+        }
+       
+        
+        function createFlower2(_nFlowers: number): void {
+            for (let i: number = 0; i < _nFlowers; i++) {
+                let randomXFlower: number = Math.random() * (crc2.canvas.width);
+                let randomYFlower: number = Math.random() * (crc2.canvas.height);
+                let flowerPosition: Vector = new Vector (randomXFlower, randomYFlower);
+                let flower: Flower2 = new Flower2(flowerPosition);
+                flower2Array.push(flower);
+            }
+
+        }
+        
+        function createFlower3(_nFlowers: number): void {
+            for (let i: number = 0; i < _nFlowers; i++) {
+                let randomXFlower: number = Math.random() * (crc2.canvas.width);
+                let randomYFlower: number = Math.random() * (crc2.canvas.height);
+                let flowerPosition: Vector = new Vector (randomXFlower, randomYFlower);
+                let flower: Flower3 = new Flower3(flowerPosition);
+                flower3Array.push(flower);
+            }
+
+        }
         function createBees(_nBees: number): void {
-            
-            
-
             for (let i: number = 0; i < _nBees; i++) {
                 let randomXBee: number = Math.random() * (crc2.canvas.width);
                 let randomYBee: number = Math.random() * (crc2.canvas.height);
@@ -316,10 +290,23 @@ namespace BlumenwieseAdvanced {
         drawTrees(0, 350, "#7a2900", "#7a2900");
         crc2.restore();
         crc2.save();
-        drawFlower1(800, 450);
-        drawFlower2(700, 550);
-        drawFlower3(900, 350);
-     
+       
+        
+        for (let flower of flowerArray) {
+            flower.drawFlower1(800, 450);
+        }
+
+        for (let flower of flower2Array) {
+            flower.drawFlower2(700, 550);
+        }
+
+
+       
+        for (let flower of flower3Array) {
+            flower.drawFlower3(900, 350);
+        }
+        
+       
         for (let bee of beeArray) {
             bee.move(1 / 30);
             bee.drawBees(0, 0);
@@ -329,7 +316,7 @@ namespace BlumenwieseAdvanced {
             cloudArray[i].drawCloud();
             cloudArray[i].move(1 / 50);
         }
-
+        
     }   
         window.setInterval(update, 20);
         

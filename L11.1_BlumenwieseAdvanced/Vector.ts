@@ -29,5 +29,9 @@ namespace BlumenwieseAdvanced {
             this.set(Math.cos(direction), Math.sin(direction));
             this.scale(length);
         }
+
+        public copy(): Vector {
+            return new Vector(this.x, this.y);
+        }
     }
 }

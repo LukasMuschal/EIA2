@@ -5,14 +5,23 @@ var BlumenwieseAdvanced;
     let canvas;
     let letters = "";
     let color = "";
+    let flowerArray = [];
+    let flower2Array = [];
+    let flower3Array = [];
     let beeArray = [];
     let cloudArray = [];
     let xCloudArray = [];
     let yCloudArray = [];
     let cloudSize = new BlumenwieseAdvanced.Vector(10, 5);
+    window.setTimeout(function () {
+        alert("Nectar Full");
+    }, 30000);
     function handleLoad(_event) {
         let canvas = document.querySelector("#board");
         let crc2 = canvas.getContext("2d");
+        createFlower3(8);
+        createFlower1(8);
+        createFlower2(8);
         createCloud();
         createCloudxy(20, cloudSize);
         createBees(10);
@@ -146,70 +155,6 @@ var BlumenwieseAdvanced;
             crc2.fill();
             crc2.closePath();
         }
-        function drawFlower1(_x, _y) {
-            for (let i = 0; i < 8; i++) {
-                if (i <= 4)
-                    _y += 50;
-                if (i >= 4)
-                    _x += 50;
-                crc2.beginPath();
-                crc2.fillStyle = "#447a3e";
-                crc2.fillRect(_x, _y, 4, 70);
-                crc2.fillStyle = "#a000d1";
-                crc2.arc(_x + 2, _y, 10, 0, 2 * Math.PI);
-                crc2.arc(_x + 2, _y + 10, 10, 0, 2 * Math.PI);
-                crc2.arc(_x - 8, _y, 10, 0, 2 * Math.PI);
-                crc2.arc(_x + 2, _y - 10, 10, 0, 2 * Math.PI);
-                crc2.arc(_x + 12, _y, 10, 0, 2 * Math.PI);
-                crc2.fill();
-                crc2.beginPath();
-                crc2.fillStyle = "yellow";
-                crc2.arc(_x + 2, _y, 5, 0, 2 * Math.PI);
-                crc2.fill();
-                crc2.closePath();
-            }
-        }
-        function drawFlower2(_x, _y) {
-            for (let i = 0; i < 8; i++) {
-                if (i <= 4)
-                    _y += 50;
-                if (i >= 4)
-                    _x += 50;
-                crc2.beginPath();
-                crc2.fillStyle = "#447a3e";
-                crc2.fillRect(_x, _y, 4, 70);
-                crc2.fillStyle = "#f00000";
-                crc2.arc(_x + 2, _y, 20, 0, 2 * Math.PI);
-                crc2.fill();
-                crc2.beginPath();
-                crc2.strokeStyle = getRandomColor();
-                crc2.fillStyle = getRandomColor();
-                crc2.moveTo(_x, _y);
-                crc2.fill();
-                crc2.stroke();
-                crc2.closePath();
-            }
-        }
-        function drawFlower3(_x, _y) {
-            for (let i = 0; i < 8; i++) {
-                if (i <= 4)
-                    _y += 50;
-                if (i >= 4)
-                    _x += 50;
-                crc2.beginPath();
-                crc2.fillStyle = "#447a3e";
-                crc2.fillRect(_x, _y, 4, 70);
-                crc2.fillStyle = "pink";
-                crc2.moveTo(_x + 2, _y);
-                crc2.lineTo(_x - 25, _y - 25);
-                crc2.lineTo(_x + 25, _y - 25);
-                crc2.moveTo(_x + 2, _y + 25);
-                crc2.lineTo(_x - 15, _y + 15);
-                crc2.lineTo(_x + 15, _y + 15);
-                crc2.fill();
-                crc2.closePath();
-            }
-        }
         function createCloudxy(_particleNumber, _size) {
             for (let i = 0; i < _particleNumber; i++) {
                 let x = (Math.random() - 0.5) * _size.x;
@@ -228,6 +173,33 @@ var BlumenwieseAdvanced;
                 let cloud = new BlumenwieseAdvanced.Cloud(cloudPosition, cloudSize, velocityCloud, xCloudArray[i], yCloudArray[i]);
                 cloud.drawCloud();
                 cloudArray.push(cloud);
+            }
+        }
+        function createFlower1(_nFlowers) {
+            for (let i = 0; i < _nFlowers; i++) {
+                let randomXFlower = Math.random() * (crc2.canvas.width);
+                let randomYFlower = Math.random() * (crc2.canvas.height);
+                let flowerPosition = new BlumenwieseAdvanced.Vector(randomXFlower, randomYFlower);
+                let flower = new BlumenwieseAdvanced.Flower1(flowerPosition);
+                flowerArray.push(flower);
+            }
+        }
+        function createFlower2(_nFlowers) {
+            for (let i = 0; i < _nFlowers; i++) {
+                let randomXFlower = Math.random() * (crc2.canvas.width);
+                let randomYFlower = Math.random() * (crc2.canvas.height);
+                let flowerPosition = new BlumenwieseAdvanced.Vector(randomXFlower, randomYFlower);
+                let flower = new BlumenwieseAdvanced.Flower2(flowerPosition);
+                flower2Array.push(flower);
+            }
+        }
+        function createFlower3(_nFlowers) {
+            for (let i = 0; i < _nFlowers; i++) {
+                let randomXFlower = Math.random() * (crc2.canvas.width);
+                let randomYFlower = Math.random() * (crc2.canvas.height);
+                let flowerPosition = new BlumenwieseAdvanced.Vector(randomXFlower, randomYFlower);
+                let flower = new BlumenwieseAdvanced.Flower3(flowerPosition);
+                flower3Array.push(flower);
             }
         }
         function createBees(_nBees) {
@@ -263,9 +235,15 @@ var BlumenwieseAdvanced;
             drawTrees(0, 350, "#7a2900", "#7a2900");
             crc2.restore();
             crc2.save();
-            drawFlower1(800, 450);
-            drawFlower2(700, 550);
-            drawFlower3(900, 350);
+            for (let flower of flowerArray) {
+                flower.drawFlower1(800, 450);
+            }
+            for (let flower of flower2Array) {
+                flower.drawFlower2(700, 550);
+            }
+            for (let flower of flower3Array) {
+                flower.drawFlower3(900, 350);
+            }
             for (let bee of beeArray) {
                 bee.move(1 / 30);
                 bee.drawBees(0, 0);
