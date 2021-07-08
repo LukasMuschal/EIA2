@@ -1,0 +1,40 @@
+h1 {
+	font-family:fantasy;
+	text-align: center;
+}
+
+#form {
+	width: 500px;
+	height: 200px;
+	background-color:lightblue;
+	justify-content: center;
+	border-color:lightcoral;
+	align-items: center;
+	text-align: left;
+	margin: 0 auto;
+	font-size: 20px;
+	font-family: fantasy;
+}
+
+button {
+	font-family: fantasy;
+	width: 100px;
+	margin-top: 20px;
+}
+button:hover {
+	background-color: lightcoral;
+}
+
+canvas {
+    width: 850px;
+    height: 600px;
+    margin-left: 200px;
+}
+
+.invisible {
+	display: none;
+}
+
+.visibility {
+	visibility: hidden;
+}
