@@ -1,17 +1,24 @@
 namespace soccerGame {
-   // let jerseyColor1: string [] = [];
-    //let jerseyColor2: string [] = [];
+
+    export enum SOCCER_EVENT {
+        SHOOT_BALL = "shootBAll"
+    }
+   
     let form: HTMLElement;
     let button: HTMLElement;
     export let playerType: string [] = [];
-
     export let crc2: CanvasRenderingContext2D;
     export let canvas: HTMLCanvasElement;
     export let imgData: ImageData;
 
-    let pLayerArray: Player [] = [];
+
+
+    let playerArray: Player [] = [];
+    export let ballArray: Ball [] = [];
 
     window.addEventListener("load", handleLoad);
+    
+    
 
 
     function handleLoad(_event: Event): void {
@@ -20,10 +27,11 @@ namespace soccerGame {
         button = <HTMLElement>document.querySelector("button");
         
         button.addEventListener("click", showField);
+        
 
         canvas = document.getElementsByTagName("canvas")[0];
         crc2 = canvas.getContext("2d")!;
-        
+       // canvas.addEventListener("click", moveBall);
 
         //Fußballfeld zeichnen
         let feld: Field = new Field;
@@ -32,8 +40,32 @@ namespace soccerGame {
         imgData = crc2.getImageData(0, 0, canvas.width, canvas.height);
 
         createPlayer();
+        createBall();
+        
+        canvas.addEventListener("click", shootBall);
+
+        imgData = crc2.getImageData(0, 0, crc2.canvas.width, crc2.canvas.height);
+        window.setInterval(update, 20);
+        
     }
 
+    function shootBall(_event: MouseEvent):  void {
+        let rect: DOMRect = canvas.getBoundingClientRect();
+        let x: number = (_event.clientX - rect.left) * 0.35;
+        let y: number = (_event.clientY - rect.top) * 0.25;
+        let positionBall: Vector = new Vector(x, y);
+        
+        let target: Spot = new Spot(positionBall);
+        ballArray.push(target);
+        console.log(x, y);
+ 
+       // let ball: Ball = new Ball(positionBall, ballVelocity, 30);
+        
+       // ballArray.push(ball);
+       // ball.draw();
+       // console.log(ball);
+ 
+     }
 
     function handleChange(_event: Event): void {
         let formData: FormData = new FormData(document.forms[0]);
@@ -48,8 +80,25 @@ namespace soccerGame {
         form.classList.add("invisible");
         button.classList.add("invisible");
         createPlayer();
+        showField();
+    
+        imgData = crc2.getImageData(0, 0, crc2.canvas.width, crc2.canvas.height);
+        window.setInterval(update, 20);
+            
+        
     }
-
+    function update(): void {
+        crc2.clearRect(0, 0, canvas.width, canvas.height);
+        crc2.putImageData(imgData, 0, 0);
+        createPlayer();
+        for (let i: number = 0; i < 20; i++) {
+            ballArray[i].draw();
+            ballArray[i].move(1 / 50);
+        }
+       
+        
+        
+    }
   
 
     function createPlayer(): void {
@@ -76,7 +125,7 @@ namespace soccerGame {
         
         let player: Player = new Player(positionTeamOne[i], playerType[0], playerType[2], playerRadius);
         player.draw();
-        pLayerArray.push();
+        playerArray.push();
         }
 
         // Team 2
@@ -103,10 +152,24 @@ namespace soccerGame {
             let playerRadius: Vector = new Vector(30, 30);
             let player: Player = new Player(positionTeamTwo[i], playerType[1], playerType[2], playerRadius);
             player.draw();
-            pLayerArray.push();
+            playerArray.push();
        }
     }
     
+    function createBall(): void {
+        
+        let positionBall: Vector = new Vector(40, 75);
+        let velocityBall: Vector = new Vector(0, 0);
+        //let radiusBall: Vector = new Vector(15, 15);
+
+        let ball: Ball = new Ball(positionBall, velocityBall, 30);
+        ball.draw();
+        ballArray.push(ball);
+        
+    }
+    
+    
+        
     
   
 }

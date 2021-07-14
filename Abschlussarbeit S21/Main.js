@@ -1,12 +1,15 @@
 "use strict";
 var soccerGame;
 (function (soccerGame) {
-    // let jerseyColor1: string [] = [];
-    //let jerseyColor2: string [] = [];
+    let SOCCER_EVENT;
+    (function (SOCCER_EVENT) {
+        SOCCER_EVENT["SHOOT_BALL"] = "shootBAll";
+    })(SOCCER_EVENT = soccerGame.SOCCER_EVENT || (soccerGame.SOCCER_EVENT = {}));
     let form;
     let button;
     soccerGame.playerType = [];
-    let pLayerArray = [];
+    let playerArray = [];
+    soccerGame.ballArray = [];
     window.addEventListener("load", handleLoad);
     function handleLoad(_event) {
         form = document.querySelector("#form");
@@ -15,12 +18,30 @@ var soccerGame;
         button.addEventListener("click", showField);
         soccerGame.canvas = document.getElementsByTagName("canvas")[0];
         soccerGame.crc2 = soccerGame.canvas.getContext("2d");
+        // canvas.addEventListener("click", moveBall);
         //Fußballfeld zeichnen
         let feld = new soccerGame.Field;
         console.log(feld);
         // Feld als Bild speichern
         soccerGame.imgData = soccerGame.crc2.getImageData(0, 0, soccerGame.canvas.width, soccerGame.canvas.height);
         createPlayer();
+        createBall();
+        soccerGame.canvas.addEventListener("click", shootBall);
+        soccerGame.imgData = soccerGame.crc2.getImageData(0, 0, soccerGame.crc2.canvas.width, soccerGame.crc2.canvas.height);
+        window.setInterval(update, 20);
+    }
+    function shootBall(_event) {
+        let rect = soccerGame.canvas.getBoundingClientRect();
+        let x = (_event.clientX - rect.left) * 0.35;
+        let y = (_event.clientY - rect.top) * 0.25;
+        let positionBall = new soccerGame.Vector(x, y);
+        let target = new soccerGame.Spot(positionBall);
+        soccerGame.ballArray.push(target);
+        console.log(x, y);
+        // let ball: Ball = new Ball(positionBall, ballVelocity, 30);
+        // ballArray.push(ball);
+        // ball.draw();
+        // console.log(ball);
     }
     function handleChange(_event) {
         let formData = new FormData(document.forms[0]);
@@ -34,6 +55,18 @@ var soccerGame;
         form.classList.add("invisible");
         button.classList.add("invisible");
         createPlayer();
+        showField();
+        soccerGame.imgData = soccerGame.crc2.getImageData(0, 0, soccerGame.crc2.canvas.width, soccerGame.crc2.canvas.height);
+        window.setInterval(update, 20);
+    }
+    function update() {
+        soccerGame.crc2.clearRect(0, 0, soccerGame.canvas.width, soccerGame.canvas.height);
+        soccerGame.crc2.putImageData(soccerGame.imgData, 0, 0);
+        createPlayer();
+        for (let i = 0; i < 20; i++) {
+            soccerGame.ballArray[i].draw();
+            soccerGame.ballArray[i].move(1 / 50);
+        }
     }
     function createPlayer() {
         let positionTeamOne = [
@@ -57,7 +90,7 @@ var soccerGame;
             let playerRadius = new soccerGame.Vector(30, 30);
             let player = new soccerGame.Player(positionTeamOne[i], soccerGame.playerType[0], soccerGame.playerType[2], playerRadius);
             player.draw();
-            pLayerArray.push();
+            playerArray.push();
         }
         // Team 2
         let positionTeamTwo = [
@@ -81,8 +114,16 @@ var soccerGame;
             let playerRadius = new soccerGame.Vector(30, 30);
             let player = new soccerGame.Player(positionTeamTwo[i], soccerGame.playerType[1], soccerGame.playerType[2], playerRadius);
             player.draw();
-            pLayerArray.push();
+            playerArray.push();
         }
+    }
+    function createBall() {
+        let positionBall = new soccerGame.Vector(40, 75);
+        let velocityBall = new soccerGame.Vector(0, 0);
+        //let radiusBall: Vector = new Vector(15, 15);
+        let ball = new soccerGame.Ball(positionBall, velocityBall, 30);
+        ball.draw();
+        soccerGame.ballArray.push(ball);
     }
 })(soccerGame || (soccerGame = {}));
 //# sourceMappingURL=Main.js.map

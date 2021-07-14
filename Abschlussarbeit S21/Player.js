@@ -12,7 +12,7 @@ var soccerGame;
             soccerGame.crc2.save();
             soccerGame.crc2.beginPath();
             soccerGame.crc2.fillStyle = this.jerseyColor;
-            soccerGame.crc2.arc(this.position.x, this.position.y, 5, 0, 2 * Math.PI);
+            soccerGame.crc2.arc(this.position.x, this.position.y, 4, 0, 2 * Math.PI);
             soccerGame.crc2.fill();
             soccerGame.crc2.restore();
         }

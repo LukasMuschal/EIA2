@@ -2,13 +2,15 @@ h1 {
 	font-family:fantasy;
 	text-align: center;
 }
-
+body {
+	background-color: darkgreen;
+}
 #form {
 	width: 500px;
 	height: 200px;
-	background-color:lightblue;
+	background-color:lightgreen;
 	justify-content: center;
-	border-color:lightcoral;
+	border-color:black;
 	align-items: center;
 	text-align: left;
 	margin: 0 auto;
@@ -22,13 +24,13 @@ button {
 	margin-top: 20px;
 }
 button:hover {
-	background-color: lightcoral;
+	background-color:darkgreen;
 }
 
 canvas {
     width: 850px;
     height: 600px;
-    margin-left: 200px;
+    
 }
 
 .invisible {

@@ -16,7 +16,7 @@ namespace soccerGame {
             crc2.save();
             crc2.beginPath();
             crc2.fillStyle = this.jerseyColor;
-            crc2.arc(this.position.x, this.position.y, 5, 0, 2 * Math.PI);
+            crc2.arc(this.position.x, this.position.y, 4, 0, 2 * Math.PI);
             crc2.fill();
             crc2.restore();
         }
