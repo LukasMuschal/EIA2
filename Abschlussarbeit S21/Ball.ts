@@ -1,37 +1,40 @@
-namespace soccerGame {
-    export class Ball extends Moveable {
-       
-        public radius: number;
+namespace soccer {
+    export class Ball {
+        position: Vector;
+        velocity: number = 0.06;  // Hier möglichst kleine Zahl weil Bewegung sonst zu schnell
+        precision: Vector;
+        ballMove: boolean = false;
+        newPos: Vector;
+        movementBegin: number = 2;
 
-        constructor(_position: Vector, _velocity: Vector, _radius: number) {
-           super(_position);
-
-           this.velocity = _velocity.copy();
-           this.radius = _radius;
+        constructor(_position: Vector) {
+            this.position = _position.copy();
+            this.newPos = _position.copy();
         }
 
         draw(): void {
             crc2.save();
             crc2.beginPath();
             crc2.fillStyle = "black";
-            crc2.arc(this.position.x, this.position.y, 2, 0, 2 * Math.PI);
+            crc2.arc(this.position.x, this.position.y, 7, 0, 2 * Math.PI);
             crc2.fill();
             crc2.closePath();
             crc2.restore();
         }
-        
 
-        move(_timeslice: number): void {
-            //super.move(_timeslice);
-            let offset: Vector = new Vector(this.velocity.x, this.velocity.y);
-            
-            offset.scale(_timeslice);
-            this.position.add(offset);
-            
+        click(_position: Vector): void {
+            this.newPos = _position.copy();
         }
-   
-    
 
-    
+        move(): void {
+            let x: number = this.newPos.x - this.position.x;  // Differenzvektor berechnen
+            let y: number = this.newPos.y - this.position.y;
+            let diffVec: Vector = new Vector(x, y);
+            diffVec.length();                                 // seine Länge bestimmen
+            diffVec.scale(this.velocity);                     // Vektor skalieren
+            this.position.add(diffVec);                       // Vektor auf P1 addieren
+
+        }
     }
+
 }

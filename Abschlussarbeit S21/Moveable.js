@@ -1,16 +1,14 @@
 "use strict";
-var soccerGame;
-(function (soccerGame) {
+var soccer;
+(function (soccer) {
     class Moveable {
         constructor(_position) {
-            this.radius = 0;
-            if (_position)
-                this.position = _position.copy();
-            else
-                this.position = new soccerGame.Vector(0, 0);
-            this.velocity = new soccerGame.Vector(0, 0);
+            this.position = _position;
+        }
+        draw() {
+            //draw
         }
     }
-    soccerGame.Moveable = Moveable;
-})(soccerGame || (soccerGame = {}));
+    soccer.Moveable = Moveable;
+})(soccer || (soccer = {}));
 //# sourceMappingURL=Moveable.js.map

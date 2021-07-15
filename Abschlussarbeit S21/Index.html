@@ -4,40 +4,53 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="Main.js"></script>
-    <script src="Moveable.js"></script>
+    <title>Soccer-Game</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="main.js"></script>
     <script src="Field.js"></script>
+    <script src="Moveable.js"></script>
+    <script src="Players.js"></script>
     <script src="Vector.js"></script>
-    <script src="Player.js"></script>
     <script src="Ball.js"></script>
-    <script src="Spot.js"></script>
-    <link rel="stylesheet" href="style.css"></style>
-    <title>Soccer Simulator</title>
 </head>
 <body>
-  
+    <h1>Jogis Soccer-Game</h1>
     <fieldset id = "form">
         <form>
             <label for = "colorTeamOne">Choose color of the first team!</label>
-            <input type = "color" class = "jerseycolor1" name = "jerseyColor1" value = "#ffffff">
+            <input type = "color" id = "jerseyColor1" value = "#ffffff">
             <br>
             <label for = "colorTeamTwo">Choose color of the second team!</label>
-            <input type = "color" class = "jerseycolor2" name = "jerseyColor2" value = "#ffffff">
+            <input type = "color" id = "jerseyColor2" value = "#ffffff">
             <br>
             <label for = "slider">Choose the values for the speed of the players!</label>
-            <input type = "range" class = "sliders" name = "sliderSpeed" min = "10" max = "100" step = "10" value = "50">
+            <input type = "range" name = "speed" id = "sliderSpeed" min = "10" max = "100" step = "10" value = "50">
             <br>
             <label for = "slider">Choose the values for the precision of the players!</label>
-            <input type = "range" class = "sliders" name = "sliderPrecision" min = "10" max = "100" step = "10" value = "50">
+            <br>
+            Minimum
+            <input type = "range" id = "minprec" min = "10" max = "100" step = "10" value = "50">
+            <br>
+            Maximum
+            <input type = "range" id = "maxprec" min = "10" max = "100" step = "10" value = "50">
             <br>
             <label for = "buttonName"></label>
             <button name = "buttonName" type = "button" class = "button">Start Game!</button> 
         </form>
     </fieldset>
-    
-    <canvas>
-    </canvas>
 
-    
+    <div id = "display">
+        <span id="T1">Team 1: </span>
+        <span id="ScoreT1">0</span>
+        <span id="T2">Team 2: </span>
+        <span id="ScoreT2">0</span>
+    </div>
+
+    <div id = "Player">
+        <span id = "PlayerT1">Playernumber</span>
+        <span id = "PlayerT2">Playernumber</span>
+    </div>
+
+    <canvas width="850" height="600"></canvas>
 </body>
 </html>

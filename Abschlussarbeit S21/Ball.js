@@ -1,28 +1,35 @@
 "use strict";
-var soccerGame;
-(function (soccerGame) {
-    class Ball extends soccerGame.Moveable {
-        constructor(_position, _velocity, _radius) {
-            super(_position);
-            this.velocity = _velocity.copy();
-            this.radius = _radius;
+var soccer;
+(function (soccer) {
+    class Ball {
+        constructor(_position) {
+            this.velocity = 0.06; // Hier möglichst kleine Zahl weil Bewegung sonst zu schnell
+            this.ballMove = false;
+            this.movementBegin = 2;
+            this.position = _position.copy();
+            this.newPos = _position.copy();
         }
         draw() {
-            soccerGame.crc2.save();
-            soccerGame.crc2.beginPath();
-            soccerGame.crc2.fillStyle = "black";
-            soccerGame.crc2.arc(this.position.x, this.position.y, 2, 0, 2 * Math.PI);
-            soccerGame.crc2.fill();
-            soccerGame.crc2.closePath();
-            soccerGame.crc2.restore();
+            soccer.crc2.save();
+            soccer.crc2.beginPath();
+            soccer.crc2.fillStyle = "black";
+            soccer.crc2.arc(this.position.x, this.position.y, 7, 0, 2 * Math.PI);
+            soccer.crc2.fill();
+            soccer.crc2.closePath();
+            soccer.crc2.restore();
         }
-        move(_timeslice) {
-            //super.move(_timeslice);
-            let offset = new soccerGame.Vector(this.velocity.x, this.velocity.y);
-            offset.scale(_timeslice);
-            this.position.add(offset);
+        click(_position) {
+            this.newPos = _position.copy();
+        }
+        move() {
+            let x = this.newPos.x - this.position.x; // Differenzvektor berechnen
+            let y = this.newPos.y - this.position.y;
+            let diffVec = new soccer.Vector(x, y);
+            diffVec.length(); // seine Länge bestimmen
+            diffVec.scale(this.velocity); // Vektor skalieren
+            this.position.add(diffVec); // Vektor auf P1 addieren
         }
     }
-    soccerGame.Ball = Ball;
-})(soccerGame || (soccerGame = {}));
+    soccer.Ball = Ball;
+})(soccer || (soccer = {}));
 //# sourceMappingURL=Ball.js.map
