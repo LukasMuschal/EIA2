@@ -23,6 +23,9 @@ var soccer;
         length() {
             return Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2));
         }
+        getDifference(_v0, _v1) {
+            return new Vector(_v0.x - _v1.x, _v0.y - _v1.y);
+        }
     }
     soccer.Vector = Vector;
 })(soccer || (soccer = {}));

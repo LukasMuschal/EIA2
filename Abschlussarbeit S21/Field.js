@@ -20,18 +20,34 @@ var soccer;
             soccer.crc2.strokeRect(_x, _y, soccer.canvas.width - 150, soccer.canvas.height - 150);
             soccer.crc2.stroke();
             soccer.crc2.closePath();
-            //Tor links
+            //Strafraum links
             soccer.crc2.beginPath();
             soccer.crc2.strokeStyle = "white";
             soccer.crc2.strokeRect(_x, _y + 125, 100, 200);
             soccer.crc2.stroke();
             soccer.crc2.closePath();
-            //Tor rechts
+            //Strafraum rechts
             soccer.crc2.beginPath();
             soccer.crc2.strokeStyle = "white";
             soccer.crc2.strokeRect(_x + 600, _y + 125, 100, 200);
             soccer.crc2.stroke();
             soccer.crc2.closePath();
+            // Tor links
+            soccer.crc2.save();
+            soccer.crc2.beginPath();
+            soccer.crc2.globalAlpha = 0.5;
+            soccer.crc2.fillStyle = "white";
+            soccer.crc2.fillRect(_x - 50, _y + 175, 50, 100);
+            soccer.crc2.fill();
+            soccer.crc2.closePath();
+            // Tor rechts
+            soccer.crc2.beginPath();
+            soccer.crc2.globalAlpha = 0.5;
+            soccer.crc2.fillStyle = "white";
+            soccer.crc2.fillRect(_x + 700, _y + 175, 50, 100);
+            soccer.crc2.fill();
+            soccer.crc2.closePath();
+            soccer.crc2.restore();
             //Mittellinie
             soccer.crc2.beginPath();
             soccer.crc2.strokeStyle = "white";

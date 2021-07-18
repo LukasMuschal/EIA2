@@ -24,16 +24,14 @@
             <input type = "color" id = "jerseyColor2" value = "#ffffff">
             <br>
             <label for = "slider">Choose the values for the speed of the players!</label>
-            <input type = "range" name = "speed" id = "sliderSpeed" min = "10" max = "100" step = "10" value = "50">
+            <input type = "range" name = "speed" id = "sliderSpeed" min = "0.03" max = "0.08" step = "0.01" value = "0.05">
             <br>
             <label for = "slider">Choose the values for the precision of the players!</label>
             <br>
-            Minimum
-            <input type = "range" id = "minprec" min = "10" max = "100" step = "10" value = "50">
+            Precision from good precision to bad precision
+            <input type = "range" id = "precision" min = "5" max = "70" step = "10" value = "20">
             <br>
-            Maximum
-            <input type = "range" id = "maxprec" min = "10" max = "100" step = "10" value = "50">
-            <br>
+           
             <label for = "buttonName"></label>
             <button name = "buttonName" type = "button" class = "button">Start Game!</button> 
         </form>
@@ -47,10 +45,13 @@
     </div>
 
     <div id = "Player">
-        <span id = "PlayerT1">Playernumber</span>
-        <span id = "PlayerT2">Playernumber</span>
+        <span id="PlayerT">Player on ball</span>
     </div>
 
     <canvas width="850" height="600"></canvas>
+    <div id = "buttons">
+    <button id = "addPlayer">Press to add player to Team 1!</button>
+    <button id = "addPlayerT2">Press to add player to Team 2!</button>
+    </div>
 </body>
 </html>

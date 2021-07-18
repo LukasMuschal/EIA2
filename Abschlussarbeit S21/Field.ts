@@ -23,18 +23,34 @@ namespace soccer {
                 crc2.stroke();
                 crc2.closePath();
     
-                //Tor links
+                //Strafraum links
                 crc2.beginPath();
                 crc2.strokeStyle = "white";
                 crc2.strokeRect(_x, _y + 125, 100, 200 );
                 crc2.stroke();
                 crc2.closePath();
-                //Tor rechts
+                //Strafraum rechts
                 crc2.beginPath();
                 crc2.strokeStyle = "white";
                 crc2.strokeRect(_x + 600, _y + 125, 100, 200);
                 crc2.stroke();
                 crc2.closePath();
+                // Tor links
+                crc2.save();
+                crc2.beginPath();
+                crc2.globalAlpha = 0.5;
+                crc2.fillStyle = "white";
+                crc2.fillRect(_x - 50, _y + 175, 50, 100);
+                crc2.fill();
+                crc2.closePath();
+                // Tor rechts
+                crc2.beginPath();
+                crc2.globalAlpha = 0.5;
+                crc2.fillStyle = "white";
+                crc2.fillRect(_x + 700, _y + 175, 50, 100);
+                crc2.fill();
+                crc2.closePath();
+                crc2.restore();
                 //Mittellinie
                 crc2.beginPath();
                 crc2.strokeStyle = "white";

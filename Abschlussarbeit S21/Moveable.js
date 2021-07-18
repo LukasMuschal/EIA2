@@ -8,6 +8,15 @@ var soccer;
         draw() {
             //draw
         }
+        move() {
+            //
+        }
+        backToPosition() {
+            //
+        }
+        contactToBall() {
+            return false;
+        }
     }
     soccer.Moveable = Moveable;
 })(soccer || (soccer = {}));
