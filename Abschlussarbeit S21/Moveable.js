@@ -17,6 +17,9 @@ var soccer;
         contactToBall() {
             return false;
         }
+        show() {
+            //
+        }
     }
     soccer.Moveable = Moveable;
 })(soccer || (soccer = {}));

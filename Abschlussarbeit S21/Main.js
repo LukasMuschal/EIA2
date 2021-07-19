@@ -16,8 +16,8 @@ var soccer;
     soccer.ballArray = [];
     let positionTeams = [[85, 285], [200, 150], [200, 285], [200, 420], [325, 285], [400, 170], [400, 390], [520, 285], [600, 120], [600, 285], [600, 460], [745, 285], [640, 450], [640, 340], [640, 230], [640, 120], [510, 360], [510, 220], [380, 120], [380, 460], [250, 220], [250, 380]];
     let jerseyNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29];
-    //let newJerseyNumber: number [] = [12, 13, 14, 15, 16, 17];
-    //let newjerseyNumberT2: number [] = [18, 19, 20, 21, 22, 23];
+    let positionRefs = [[340, 300], [610, 40], [190, 550]];
+    let refTyp = ["Ref", "RefOben", "RefUnten"];
     function handleLoad(_event) {
         soccer.canvas = document.getElementsByTagName("canvas")[0];
         soccer.crc2 = soccer.canvas.getContext("2d");
@@ -60,6 +60,7 @@ var soccer;
         button3 = document.querySelector("#addPlayerT2");
         button3.addEventListener("click", newPlayerT2);
         soccer.canvas.addEventListener("click", deletePlayer);
+        document.addEventListener("keypress", showValues);
         window.setInterval(update, 50); // update Funktion wird gestartet
     }
     function newPlayer(_event) {
@@ -105,6 +106,11 @@ var soccer;
             player.draw();
             soccer.moveables.push(player);
         }
+        for (let i = 0; i <= 2; i++) {
+            let reff = new soccer.Referee(new soccer.Vector(positionRefs[i][0], positionRefs[i][1]), refTyp[i]);
+            reff.draw();
+            soccer.moveables.push(reff);
+        }
     }
     function createBall() {
         soccer.ball = new soccer.Ball(new soccer.Vector(415, 290));
@@ -137,7 +143,6 @@ var soccer;
         soccer.crc2.putImageData(soccer.imgData, 0, 0); // Hintergrund als Bild bleibt erhalten
         if (soccer.ball.ballMove == false && playeronBall() == true) { // wenn ball sich nicht bewegt und ein Spieler am Ball ist => "stoppt" das Spiel
             for (let player of soccer.moveables) {
-                //console.log("Spiel stoppt")
                 player.draw();
             }
         }
@@ -162,6 +167,14 @@ var soccer;
         let y = _event.clientY - rect.top; // Position des Klicks wird ermittelt
         soccer.ball.click(new soccer.Vector(x, y)); // position als neuer Vektor gespeichert
         console.log(soccer.ball);
+    }
+    function showValues(_event) {
+        let infoKey = _event.key;
+        if (infoKey == "i") {
+            for (let player of soccer.moveables) {
+                player.show();
+            }
+        }
     }
 })(soccer || (soccer = {}));
 //# sourceMappingURL=main.js.map

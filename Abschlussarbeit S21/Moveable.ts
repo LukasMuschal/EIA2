@@ -28,5 +28,9 @@ namespace soccer {
             return false;
         }
 
+        public show(): void {
+            //
+        }
+
     }
 }

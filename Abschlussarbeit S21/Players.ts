@@ -7,6 +7,7 @@ namespace soccer {
         jerseyNumber: number;
         
        declare team: String;
+      
 
         constructor(_position: Vector, _jerseyNumber: number) {
             super(_position);
@@ -84,7 +85,26 @@ namespace soccer {
             this.position.add(difVec);
         }
 
+       show(): void {
+        let infoBox: HTMLElement = document.createElement("div");
+        let info: HTMLElement = document.createElement("p");
+        info.innerHTML = "Team: " + this.team + "<br>" + "Jerseynumber: " + this.jerseyNumber + "<br>" + "Speed: " + this.velocity + "<br>";
+        info.style.fontFamily = "fantasy";
+        info.style.fontSize = "12px";
+        info.style.backgroundColor = this.jerseyColor;
+        infoBox.style.width = "1000px";
+        info.style.overflow = "auto";
+        info.style.float = "left";
        
+    
+        document.body.appendChild(infoBox);
+        infoBox.appendChild(info);
+
+        setTimeout(function (): void {
+            document.body.removeChild(infoBox);
+        },         7000);
+
+       }
     }
 
 }

@@ -75,6 +75,22 @@ var soccer;
             difVec.scale(this.velocity);
             this.position.add(difVec);
         }
+        show() {
+            let infoBox = document.createElement("div");
+            let info = document.createElement("p");
+            info.innerHTML = "Team: " + this.team + "<br>" + "Jerseynumber: " + this.jerseyNumber + "<br>" + "Speed: " + this.velocity + "<br>";
+            info.style.fontFamily = "fantasy";
+            info.style.fontSize = "12px";
+            info.style.backgroundColor = this.jerseyColor;
+            infoBox.style.width = "1000px";
+            info.style.overflow = "auto";
+            info.style.float = "left";
+            document.body.appendChild(infoBox);
+            infoBox.appendChild(info);
+            setTimeout(function () {
+                document.body.removeChild(infoBox);
+            }, 7000);
+        }
     }
     soccer.Player = Player;
 })(soccer || (soccer = {}));
