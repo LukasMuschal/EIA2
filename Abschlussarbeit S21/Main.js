@@ -10,8 +10,6 @@ var soccer;
     soccer.jerseyColor2 = "";
     soccer.speed = 0.05;
     soccer.ballControl = 20;
-    // export let minPrec: number = 0.4;
-    // export let maxPrec: number = 1.2;
     soccer.moveables = [];
     soccer.ballArray = [];
     let positionTeams = [[85, 285], [200, 150], [200, 285], [200, 420], [325, 285], [400, 170], [400, 390], [520, 285], [600, 120], [600, 285], [600, 460], [745, 285], [640, 450], [640, 340], [640, 230], [640, 120], [510, 360], [510, 220], [380, 120], [380, 460], [250, 220], [250, 380]];
@@ -89,8 +87,6 @@ var soccer;
             let y = _event.clientY - rect.top;
             for (let [i, moveable] of soccer.moveables.entries()) {
                 if (moveable instanceof soccer.Player) {
-                    //let v1: Vector = new Vector(moveable.position.x, moveable.position.y);
-                    //let v2: Vector = new Vector(x, y);
                     let diffVec = new soccer.Vector(moveable.position.x - x, moveable.position.y - y);
                     let length = diffVec.length();
                     if (length <= 20) { // Bereich für löschen => Notwendig sonst werden viele gelöscht
