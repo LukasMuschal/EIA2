@@ -25,8 +25,8 @@ namespace soccer {
 
     let positionTeams: number [] [] = [[85, 285], [200, 150], [200, 285], [200, 420], [325, 285], [400, 170], [400, 390], [520, 285], [600, 120], [600, 285], [600, 460], [745, 285], [640, 450], [640, 340], [640, 230], [640, 120], [510, 360], [510, 220], [380, 120], [380, 460], [250, 220], [250, 380]];
     let jerseyNumbers: number [] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29];
-    //let newJerseyNumber: number [] = [12, 13, 14, 15, 16, 17];
-    //let newjerseyNumberT2: number [] = [18, 19, 20, 21, 22, 23];
+    let positionRefs: number [] [] = [[340, 300], [610, 40], [190, 550]];
+    let refTyp: string [] = ["Ref", "RefOben", "RefUnten"];
     function handleLoad(_event: Event): void {
         canvas = document.getElementsByTagName("canvas")[0];
         crc2 = canvas.getContext("2d")!;
@@ -74,12 +74,15 @@ namespace soccer {
         
         
         
+        
         canvas.addEventListener("click", clickBall);
         button2 = <HTMLElement>document.querySelector("#addPlayer");
         button2.addEventListener("click", newPlayer);
         button3 = <HTMLElement>document.querySelector("#addPlayerT2");
         button3.addEventListener("click", newPlayerT2);
         canvas.addEventListener("click", deletePlayer);
+        document.addEventListener("keypress", showValues);
+
        
         
 
@@ -140,6 +143,12 @@ namespace soccer {
             player.draw();
             moveables.push(player);
         }
+
+        for (let i: number = 0; i <= 2; i++) {
+            let reff: Referee = new Referee(new Vector(positionRefs[i][0], positionRefs[i][1]), refTyp[i]);
+            reff.draw();
+            moveables.push(reff);
+        }
     }
 
     function createBall(): void {
@@ -179,7 +188,6 @@ namespace soccer {
        
        if (ball.ballMove == false && playeronBall() == true) { // wenn ball sich nicht bewegt und ein Spieler am Ball ist => "stoppt" das Spiel
         for (let player of moveables) {
-            //console.log("Spiel stoppt")
             player.draw();
         }
     }else {
@@ -208,5 +216,20 @@ namespace soccer {
         ball.click(new Vector(x, y));                       // position als neuer Vektor gespeichert
         console.log(ball);
     }
+    
+    function showValues(_event: KeyboardEvent): void {
+        let infoKey: string = _event.key;
+        
+        if (infoKey == "i") {
+            for (let player of moveables) {
+                player.show()
+            }     
+        }
+        
+       
+
+    }
+
+
 
 }
