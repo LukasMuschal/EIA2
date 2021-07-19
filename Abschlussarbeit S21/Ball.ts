@@ -7,7 +7,7 @@ namespace soccer {
         newPos: Vector;
         scoreT1: number = 0;
         scoreT2: number = 0;
-        threshhold: number = 2;
+        
 
        constructor(_position: Vector) {
             this.position = _position.copy();
@@ -37,7 +37,7 @@ namespace soccer {
            
             let diffVec: Vector = new Vector(x, y);
             diffVec.length();                               // seine Länge bestimmen
-            if (diffVec.length() < this.threshhold) {        // Wert ab dem der Ball als stehend gilt
+            if (diffVec.length() < 2) {        // Wert ab dem der Ball als stehend gilt
                 this.ballMove = false;                        // wenn Ball steht => false
                
                 

@@ -8,7 +8,6 @@ var soccer;
             this.ballMove = false;
             this.scoreT1 = 0;
             this.scoreT2 = 0;
-            this.threshhold = 2;
             this.position = _position.copy();
             this.newPos = _position.copy();
             this.precision = Math.random() * (soccer.ballControl - 10) + 10;
@@ -30,7 +29,7 @@ var soccer;
             let y = (this.newPos.y + this.precision) - this.position.y;
             let diffVec = new soccer.Vector(x, y);
             diffVec.length(); // seine Länge bestimmen
-            if (diffVec.length() < this.threshhold) { // Wert ab dem der Ball als stehend gilt
+            if (diffVec.length() < 2) { // Wert ab dem der Ball als stehend gilt
                 this.ballMove = false; // wenn Ball steht => false
             }
             else {
