@@ -15,9 +15,7 @@ namespace soccer {
     export let jerseyColor2: String = "";
     export let speed: number = 0.05;
     export let ballControl: number = 20;
-   // export let minPrec: number = 0.4;
-   // export let maxPrec: number = 1.2;
-
+  
     export let moveables: Moveable [] = [];
     export let ball: Ball;
     export let ballArray: Ball [] = [];
@@ -27,6 +25,7 @@ namespace soccer {
     let jerseyNumbers: number [] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29];
     let positionRefs: number [] [] = [[340, 300], [610, 40], [190, 550]];
     let refTyp: string [] = ["Ref", "RefOben", "RefUnten"];
+
     function handleLoad(_event: Event): void {
         canvas = document.getElementsByTagName("canvas")[0];
         crc2 = canvas.getContext("2d")!;
@@ -122,8 +121,6 @@ namespace soccer {
             
             for(let [i, moveable] of moveables.entries()) {
                 if (moveable instanceof Player) {
-                   //let v1: Vector = new Vector(moveable.position.x, moveable.position.y);
-                   //let v2: Vector = new Vector(x, y);
                     let diffVec: Vector = new Vector(moveable.position.x - x, moveable.position.y - y);
                     let length: number = diffVec.length();
                     if (length <= 20) {          // Bereich für löschen => Notwendig sonst werden viele gelöscht
